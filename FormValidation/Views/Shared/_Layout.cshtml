@@ -62,5 +62,31 @@
   </script>
 
   @RenderSection("scripts", required: false)
+
+  @{
+    var ms = ViewData.ModelState;
+    if (!ms.IsValid)
+    {
+      <script type="text/javascript">
+        $(function () {
+          var fv = $("form").data("formValidation");
+
+          @foreach (var key in ms.Keys)
+          {
+            if (!ms.IsValidField(key))
+            {
+              string message = string.Join("", ms[key].Errors.Select(x => x.ErrorMessage));
+
+              <text>
+                fv
+                  .updateMessage("@key", "blank", "@message")
+                  .updateStatus("@key", "INVALID", "blank");
+              </text>
+            }
+          }
+        });
+      </script>
+    }
+  }
 </body>
 </html>

@@ -46,6 +46,12 @@
                 return this.View(model);
             }
 
+            if (model.Name.All(char.IsUpper))
+            {
+                this.ModelState.AddModelError("Name", "全部大文字はダメです。");
+                return this.View(model);
+            }
+
             return this.RedirectToAction("Post");
         }
     }
