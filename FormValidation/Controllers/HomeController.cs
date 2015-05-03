@@ -35,7 +35,9 @@
             return this.View();
         }
 
+        
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Post(
             [Required] PostModel model)
         {
