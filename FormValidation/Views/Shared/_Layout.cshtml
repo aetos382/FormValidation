@@ -7,7 +7,7 @@
   <title>@ViewBag.Title - マイ ASP.NET アプリケーション</title>
 
   @Styles.Render("~/Content/css")
-  <link rel="stylesheet" type="text/css" href="@Url.Content("~/lib/formValidation/dist/css/formValidation.min.css")"/>
+  <link rel="stylesheet" type="text/css" href="@Url.Content("~/lib/formValidation/dist/css/formValidation.min.css")" />
 
   @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -46,6 +46,20 @@
   <script type="text/javascript" src="@Url.Content("~/lib/formValidation/dist/js/formValidation.min.js")"></script>
   <script type="text/javascript" src="@Url.Content("~/lib/formValidation/dist/js/framework/bootstrap.min.js")"></script>
   <script type="text/javascript" src="@Url.Content("~/lib/formValidation/dist/js/language/ja_JP.js")"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      $("form").formValidation({
+        framework: "bootstrap",
+        locale: "ja_JP",
+        err: {
+          container: function ($field, validator) {
+            return $field.closest(".form-group").find(".validation-message");
+          }
+        }
+      });
+    });
+  </script>
 
   @RenderSection("scripts", required: false)
 </body>
